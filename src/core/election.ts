@@ -1,7 +1,7 @@
-import Hash from 'ipfs-only-hash';
 import { AccountData, ChainData } from '../client';
 import { CensusOrigin, NewProcessTx, ProcessStatus, Tx, TxType } from '../dvote-protobuf/build/ts/vochain/vochain';
 import { checkValidElectionMetadata, Election, ElectionMetadata, ElectionMetadataTemplate } from '../types';
+import cidHash from '../util/hash';
 import { TransactionCore } from './transaction';
 
 export abstract class ElectionCore extends TransactionCore {
@@ -115,9 +115,10 @@ export abstract class ElectionCore extends TransactionCore {
 
     checkValidElectionMetadata(metadata);
 
-    return Hash.of(JSON.stringify(metadata)).then((id) => {
-      return { id, metadata };
-    });
+    return cidHash(metadata).then((id) => ({
+      id,
+      metadata,
+    }));
   }
 
   /**
