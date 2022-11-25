@@ -4,9 +4,15 @@ services:
   voconed:
     image: "vocdoni/go-dvote:latest"
     entrypoint: "/app/voconed"
-    # TODO: treasurer should really go into voconed.env but voconed doesn't yet support it as an env, only as cmdline arg
-    command: "--treasurer=0xfe10DAB06D636647f4E40dFd56599da9eF66Db1c"
     env_file: voconed.env
+    # TODO: the following flags should really go into voconed.env
+    # but voconed doesn't yet support it as an env, only as cmdline arg
+    command: |
+      --setTxCosts --txCosts 10
+      --fundedAccounts 0x3e951345Fd7f3fE62606356C31a1a7CD948ea101:1000
+    # account 0x3e951345Fd7f3fE62606356C31a1a7CD948ea101 corresponds to privkey:
+    # 8b254cdf202856f9e2f0a6b493bb8d1598302c33ec3e79b729eb1963358073d5
+    # and will be funded with 1000 tokens
     volumes:
       - "run:/app/run"
     ports:
