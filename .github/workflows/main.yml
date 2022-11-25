@@ -71,7 +71,7 @@ jobs:
           docker-compose -f test/integration/docker-compose.yml port voconed 9095 >> $GITHUB_ENV
 
       - name: Integration tests
-        run: yarn test test/integration --ci --coverage --maxWorkers=2
+        run: yarn test:integration --ci --coverage --maxWorkers=2
         env:
           API_URL: http://${{ env.voconed_hostport }}/dvote
           FAUCET_URL: ${{ secrets.FAUCET_URL }}
