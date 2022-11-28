@@ -1,0 +1,31 @@
+{
+  "name": "e2e",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "scripts": {
+    "clean": "rimraf node_modules dist",
+    "start": "ts-node index.ts",
+    "build": "rimraf dist && ts-node esbuild.ts && yarn ts-types",
+    "lint": "eslint -ext .js,.jsx,.ts,.tsx",
+    "lintfix": "yarn lint --fix",
+    "prepare": "yarn build"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "devDependencies": {
+    "eslint": "^8.27.0",
+    "eslint-config-prettier": "^8.5.0",
+    "prettier": "^2.7.1",
+    "ts-node": "^10.9.1",
+    "tslib": "^2.4.0",
+    "typescript": "^4.8.4"
+  },
+  "dependencies": {
+    "@ethersproject/signing-key": "^5.7.0",
+    "@ethersproject/wallet": "^5.7.0",
+    "@types/node": "^18.11.9",
+    "vocdoni-sdk": "file:../../vocdoni-sdk-v0.0.1-alpha.tgz"
+  }
+}
